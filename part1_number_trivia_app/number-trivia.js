@@ -7,14 +7,24 @@ numForm.addEventListener("submit", event => {
 
     document.querySelector("#displayArea h2").innerText=faveNum
 
-    axios.get(`http://numbersapi.com/${faveNum}/trivia `)
-    .then(res => {
-        console.log(res);
-        return res.data;
-    })
-    .then (res => {
-        document.querySelector("#displayArea p").innerText=res;
-    })
-    .catch(res => console.log("oops - there was a problem"));
+    // axios.get(`http://numbersapi.com/${faveNum}/trivia `)
+    // .then(res => {
+    //     console.log(res);
+    //     return res.data;
+    // })
+    // .then (res => {
+    //     document.querySelector("#displayArea p").innerText=res;
+    // })
+    // .catch(res => console.log("oops - there was a problem"));
+
+    //SOLUTION VERSION TWO WITH ASYNC/AWAIT
+
+    async function getTrivia(faveNum) {
+        let trivia = await axios.get(`http://numbersapi.com/${faveNum}/trivia `);
+        document.querySelector("#displayArea p").innerText=trivia.data;
+        return true;
+    }
+
+    getTrivia(faveNum);
 })
 
